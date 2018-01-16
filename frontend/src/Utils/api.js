@@ -29,7 +29,6 @@ const setFetch = (endpoint = '', payload = {}, method = 'POST') => {
 			body: JSON.stringify(payload)
 		})
 		.then(res => res.json())
-		.then(data => data)
 		.catch(error => {
 			throw new Error(error);
 		});
