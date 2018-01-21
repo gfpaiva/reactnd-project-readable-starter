@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 import {
 	GET_CATEGORIES,
-	GET_POSTS
+	GET_POSTS,
+	VOTE_POST
 } from '../Actions';
 
 const categories = (state = [], action) => {
@@ -15,10 +16,17 @@ const categories = (state = [], action) => {
 };
 
 const posts = (state = {}, action) => {
-	const { posts } = action;
+	const { posts, post, option } = action;
 	switch(action.type) {
 		case GET_POSTS:
 			return posts;
+		case VOTE_POST:
+			if(option === 'upVote') {
+				post.voteScore = post.voteScore + 1;
+			} else {
+				post.voteScore = post.voteScore - 1;
+			}
+			return state;
 		default:
 			return state;
 	}

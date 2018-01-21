@@ -1,0 +1,36 @@
+.header__wrapper {
+  background: #34435E;
+  color: #D8D2E1;
+}
+
+.header__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__title { font-weight: 100 }
+.header__strong { font-weight: 700 }
+
+.header__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header__item {
+  display: inline-block;
+  margin: .5em 1em;
+}
+
+.header__item:first-child { margin-left: 0 }
+
+.header__link {
+  color: #60E1E0;
+  text-transform: capitalize;
+  font-weight: bold;
+  transition: color .5s ease;
+}
+
+.header__link:hover { color: #6369D1 }
+
