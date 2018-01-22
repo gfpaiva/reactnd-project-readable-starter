@@ -2,7 +2,8 @@ import { combineReducers } from 'redux';
 import {
 	GET_CATEGORIES,
 	GET_POSTS,
-	VOTE_POST
+	VOTE_POST,
+	SET_SCORE
 } from '../Actions';
 
 const categories = (state = [], action) => {
@@ -21,18 +22,41 @@ const posts = (state = {}, action) => {
 		case GET_POSTS:
 			return posts;
 		case VOTE_POST:
+			let newScore;
+
 			if(option === 'upVote') {
-				post.voteScore = post.voteScore + 1;
+				newScore = post.voteScore + 1;
 			} else {
-				post.voteScore = post.voteScore - 1;
+				newScore = post.voteScore - 1;
 			}
-			return state;
+
+			return {
+				...state,
+				[post.id]: {
+					...state[post.id],
+					voteScore: newScore
+				}
+			};
 		default:
 			return state;
 	}
 };
 
+const sort = (state = {value: 'voteScore', order: 'desc'}, action) => {
+	const { sort } = action;
+	switch(action.type) {
+		case SET_SCORE:
+			return {
+				value: sort.value,
+				order: sort.order
+			};
+		default:
+			return state;
+	}
+}
+
 export default combineReducers({
 	categories,
-	posts
+	posts,
+	sort
 });
