@@ -30,6 +30,10 @@ export const fetchPosts = () => dispatch => (
 	API.getPosts()
 		.then(posts => dispatch(getPosts(normalize({posts}, postSchema).entities.posts)))
 );
+export const fetchPostById = id => dispatch => (
+	API.getPostById(id)
+		.then(post => dispatch(getPosts(normalize({posts: [post]}, postSchema).entities.posts)))
+);
 export const vote = (post, option) => ({
 	type: VOTE_POST,
 	post,

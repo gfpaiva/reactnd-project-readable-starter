@@ -20,7 +20,7 @@ const posts = (state = {}, action) => {
 	const { posts, post, option } = action;
 	switch(action.type) {
 		case GET_POSTS:
-			return posts;
+			return posts || state;
 		case VOTE_POST:
 			let newScore;
 
