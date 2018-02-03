@@ -5,6 +5,7 @@ import { fetchCategories } from './Actions';
 import Header from './Components/Header/Header';
 import Home from './Pages/Home';
 import Single from './Pages/Single';
+import NotFound from './Pages/NotFound';
 
 class App extends Component {
 
@@ -18,11 +19,10 @@ class App extends Component {
 				<Header />
 				<Switch>
 					<Route exact path="/" component={Home}/>
-
+					<Route exact path="/:category" component={Home}/>
 					<Route exact path="/:category/:id" component={Single}/>
-
 					{/* 404 page */}
-					<Route render={() => (<h1 style={{textAlign: 'center'}}>Page not foud <span role="img" aria-label="Neutral Face">😐</span></h1>)} />
+					<Route component={NotFound} />
 				</Switch>
 			</div>
 		);

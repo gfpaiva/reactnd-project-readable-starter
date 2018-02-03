@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import NotFound from './NotFound';
 import Post from '../Components/Post/Post';
 import Sort from '../Components/Sort/Sort';
 import { fetchPosts } from '../Actions';
@@ -12,15 +13,20 @@ class Home extends Component {
 	};
 
 	render() {
-		const { posts } = this.props;
+		let { posts, match } = this.props;
+
+		if(match.params.category) posts = posts.filter(post => post.category === match.params.category);
 
 		return (
 			<div className="container">
-				<Sort />
+				{(!posts || posts.length <= 0) && <NotFound />}
 				{(posts && posts.length > 0) &&
-				posts.map(post => (
-					<Post {...{post}} key={post.id} />
-				))}
+				<div>
+					<Sort />
+					{posts.map(post => (
+						<Post {...{post}} key={post.id} />
+					))}
+				</div>}
 			</div>
 		);
 	};

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Post from '../Components/Post/Post';
 import { fetchPostById } from '../Actions';
+import NotFound from './NotFound';
 
 
 class Single extends Component {
-
 	componentDidMount() {
 		const { posts, match } = this.props;
 
@@ -17,8 +17,11 @@ class Single extends Component {
 		const post = posts[match.params.id];
 
 		return (
-			<div className="container">
-				{post && <Post {...{post}} key={post.id} />}
+			<div>
+				{!post && <NotFound />}
+				<div className="container">
+					{post && <Post {...{post}} key={post.id} />}
+				</div>
 			</div>
 		);
 	};
