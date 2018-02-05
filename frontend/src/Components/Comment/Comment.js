@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { formatDate } from '../../Utils/helpers';
-import { FaAngleUp, FaAngleDown, FaUser, FaCalendar, FaCommentsO } from 'react-icons/lib/fa';
+import { FaAngleUp, FaAngleDown, FaUser, FaCalendar } from 'react-icons/lib/fa';
 import { vote } from '../../Actions';
 
-class Post extends Component {
+class Comment extends Component {
 
 	handleVote(e) {
 		const post = this.props.post;
@@ -16,25 +15,20 @@ class Post extends Component {
 
 
 	render() {
-		const { post } = this.props;
+		const { comment } = this.props;
 
 		return (
 			<div>
 				<div>
-					<h2>
-						<Link to={`/${post.category}/${post.id}`}>
-							{post.title}
-						</Link>
-					</h2>
-					<p><FaUser /> {post.author}</p>
-					<p><FaCalendar /> {formatDate(post.timestamp)}</p>
-					<p><FaCommentsO /> {post.commentCount}</p>
+					<p>{comment.body}	</p>
+					<p><FaUser /> {comment.author}</p>
+					<p><FaCalendar /> {formatDate(comment.timestamp)}</p>
 				</div>
 				<div>
 					<button title="Vote Up" value="upVote" onClick={e => this.handleVote(e)}>
 						<FaAngleUp />
 					</button>
-					<p>{post.voteScore}</p>
+					<p>{comment.voteScore}</p>
 					<button title="Vote Down" value="downVote" onClick={e => this.handleVote(e)}>
 						<FaAngleDown />
 					</button>
@@ -44,4 +38,4 @@ class Post extends Component {
 	}
 };
 
-export default connect(null)(Post);
+export default connect(null)(Comment);

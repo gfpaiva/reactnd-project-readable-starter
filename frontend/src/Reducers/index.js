@@ -3,7 +3,9 @@ import {
 	GET_CATEGORIES,
 	GET_POSTS,
 	VOTE_POST,
-	SET_SCORE
+	SET_SCORE,
+	GET_COMMENTS,
+	UPDATE_LOADING
 } from '../Actions';
 
 const categories = (state = [], action) => {
@@ -42,6 +44,16 @@ const posts = (state = {}, action) => {
 	}
 };
 
+const comments = (state = {}, action) => {
+	const { comments, comment, option } = action;
+	switch(action.type) {
+		case GET_COMMENTS:
+			return comments || state;
+		default:
+			return state;
+	}
+};
+
 const sort = (state = {value: 'voteScore', order: 'desc'}, action) => {
 	const { sort } = action;
 	switch(action.type) {
@@ -53,10 +65,23 @@ const sort = (state = {value: 'voteScore', order: 'desc'}, action) => {
 		default:
 			return state;
 	}
-}
+};
+
+const isLoading = (state = true, action) => {
+	const { isLoading } = action;
+
+	switch(action.type) {
+		case UPDATE_LOADING:
+			return isLoading;
+		default:
+			return state;
+	}
+};
 
 export default combineReducers({
 	categories,
 	posts,
-	sort
+	comments,
+	sort,
+	isLoading
 });
