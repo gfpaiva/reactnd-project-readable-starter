@@ -4,7 +4,7 @@ html, body {
   background: #fff;
   color: #34435E;
   font-family: 'Lato', sans-serif;
-  height: 100%;
+  min-height: 100%;
 }
 
 a {
@@ -16,4 +16,19 @@ a {
   margin: 0 auto;
   max-width: 1080px;
   width: 90%;
+}
+
+.btn {
+  background-color: rgb(23, 24, 46);
+  border: none;
+  box-shadow: 0px 5px 15px rgba(0,0,0,.55);
+  color: #60E1E0;
+  cursor: pointer;
+  padding: .5em 2em;
+  transition: all .5s ease;
+}
+
+.btn:hover {
+  background-color: rgba(23, 24, 46, .95);
+  box-shadow: 0px 5px 15px rgba(0,0,0,.75);
 }

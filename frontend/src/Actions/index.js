@@ -6,6 +6,8 @@ export const GET_POSTS = 'GET_POSTS';
 export const VOTE_POST = 'VOTE_POST';
 export const SET_SCORE = 'SET_SCORE';
 export const GET_COMMENTS = 'GET_COMMENTS';
+export const SET_COMMENT = 'SET_COMMENT';
+export const VOTE_COMMENT = 'VOTE_COMMENT';
 export const UPDATE_LOADING = 'UPDATE_LOADING';
 
 
@@ -42,7 +44,7 @@ export const fetchPostById = id => dispatch => {
 			.then(post => dispatch(getPosts(normalize({posts: [post]}, postSchema).entities.posts)))
 			.then(() => dispatch(changeLoader(false)));
 };
-export const vote = (post, option) => {
+export const votePost = (post, option) => {
 	API.votePost(post.id, option);
 
 	return	{
@@ -67,6 +69,23 @@ export const fetchCommentsByPostId = id => dispatch => {
 	return API.getCommentsByPostId(id)
 			.then(comments => dispatch(getComments(normalize({comments}, commentSchema).entities.comments)))
 			.then(() => dispatch(changeLoader(false)));
+};
+export const voteComment = (comment, option) => {
+	API.voteComment(comment.id, option);
+
+	return	{
+		type: VOTE_COMMENT,
+		comment,
+		option
+	};
+};
+export const setComment = comment => {
+	API.setComment(comment);
+
+	return	{
+		type: SET_COMMENT,
+		comment
+	};
 };
 
 

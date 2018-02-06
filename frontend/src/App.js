@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { fetchCategories } from './Actions';
 import Header from './Components/Header/Header';
+import Footer from './Components/Footer/Footer';
 import Archive from './Pages/Archive';
 import Single from './Pages/Single';
 import NotFound from './Pages/NotFound';
@@ -24,6 +25,7 @@ class App extends Component {
 					{/* 404 page */}
 					<Route component={NotFound} />
 				</Switch>
+				<Footer />
 			</div>
 		);
 	}

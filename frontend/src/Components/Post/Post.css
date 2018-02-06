@@ -1,0 +1,44 @@
+.wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.post__wrapper {
+	background-color: #dedede;
+	border: 1px solid #b0b0b0;
+	margin: 20px auto;
+	max-width: 75%;
+	padding: 20px;
+}
+
+.post__title {
+	margin-top: 0;
+}
+
+.post__infos {
+	flex: 1;
+	margin-right: 20px
+}
+
+.info {
+	margin: 0;
+}
+
+.post__vote {
+	text-align: center;
+}
+
+.post__button {
+	border: none;
+	background: #fff;
+	padding: .5em;
+	border: 1px solid #34435E
+}
+
+.post__body {
+	border-top: 1px solid;
+	padding-top: 20px;
+	margin-bottom: 0;
+	font-size: 18px;
+}

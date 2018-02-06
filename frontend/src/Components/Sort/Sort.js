@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { capitalize as _capitalize } from 'lodash';
 import { sort } from '../../Actions';
 
+import './Sort.css';
+
 class Sort extends Component {
 
 	state = {
@@ -37,9 +39,9 @@ class Sort extends Component {
 
 	render() {
 		return (
-			<div>
-				<span>Order By: </span>
-				<select onChange={e => this.selectSort(e)}>
+			<div className="sort">
+				<span className="sort__title">Order By: </span>
+				<select className="sort__select" onChange={e => this.selectSort(e)}>
 					{ this.state.options.map((option, index) => <option key={index} value={index}>{_capitalize(option.title)}</option>) }
 				</select>
 			</div>

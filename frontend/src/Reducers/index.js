@@ -5,8 +5,28 @@ import {
 	VOTE_POST,
 	SET_SCORE,
 	GET_COMMENTS,
+	SET_COMMENT,
+	VOTE_COMMENT,
 	UPDATE_LOADING
 } from '../Actions';
+
+const voteCase = (state, action, type) => {
+	let newScore;
+
+	if(action.option === 'upVote') {
+		newScore = action[type].voteScore + 1;
+	} else {
+		newScore = action[type].voteScore - 1;
+	}
+
+	return {
+		...state,
+		[action[type].id]: {
+			...state[action[type].id],
+			voteScore: newScore
+		}
+	};
+};
 
 const categories = (state = [], action) => {
 	const { categories } = action;
@@ -19,24 +39,18 @@ const categories = (state = [], action) => {
 };
 
 const posts = (state = {}, action) => {
-	const { posts, post, option } = action;
+	const { posts, comment } = action;
 	switch(action.type) {
 		case GET_POSTS:
 			return posts || state;
 		case VOTE_POST:
-			let newScore;
-
-			if(option === 'upVote') {
-				newScore = post.voteScore + 1;
-			} else {
-				newScore = post.voteScore - 1;
-			}
-
+			return voteCase(state, action, 'post');
+		case SET_COMMENT:
 			return {
 				...state,
-				[post.id]: {
-					...state[post.id],
-					voteScore: newScore
+				[comment.parentId]: {
+					...state[comment.parentId],
+					commentCount: state[comment.parentId].commentCount + 1
 				}
 			};
 		default:
@@ -45,10 +59,20 @@ const posts = (state = {}, action) => {
 };
 
 const comments = (state = {}, action) => {
-	const { comments, comment, option } = action;
+	const { comments, comment } = action;
 	switch(action.type) {
 		case GET_COMMENTS:
-			return comments || state;
+			return {
+				...state,
+				...comments
+			};
+		case SET_COMMENT:
+			return {
+				...state,
+				[comment.id] : comment
+			};
+		case VOTE_COMMENT:
+			return voteCase(state, action, 'comment');
 		default:
 			return state;
 	}

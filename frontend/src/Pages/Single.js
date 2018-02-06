@@ -3,11 +3,27 @@ import { connect } from 'react-redux';
 import Post from '../Components/Post/Post';
 import Comment from '../Components/Comment/Comment';
 import Loader from '../Components/Loader/Loader';
-import { fetchPostById, fetchCommentsByPostId } from '../Actions';
+import { fetchPostById, fetchCommentsByPostId, setComment } from '../Actions';
 import NotFound from './NotFound';
 import { values as _values } from 'lodash';
+import moment from 'moment';
 
 class Single extends Component {
+	state = {
+		commentBody: '',
+	};
+
+	commentTemplate = {
+		id: null,
+		parentId: null,
+		timestamp: null,
+		body: null,
+		author: 'gfpaiva',
+		voteScore: 1,
+		deleted: false,
+		parentDeleted: false
+	}
+
 	componentDidMount() {
 		const { posts, match } = this.props;
 
@@ -16,10 +32,35 @@ class Single extends Component {
 		this.props.dispatch(fetchCommentsByPostId(match.params.id));
 	};
 
+	bodyChange = e => {
+		this.setState({
+			commentBody: e.target.value
+		});
+	};
+
+	saveComment = e => {
+		e.preventDefault();
+
+		let newComment = {
+			...this.commentTemplate,
+			id: btoa(moment().valueOf()),
+			parentId: this.props.match.params.id,
+			timestamp: moment().valueOf(),
+			body: this.state.commentBody
+		};
+
+		this.props.dispatch(setComment(newComment));
+		this.setState({
+			commentBody: ''
+		})
+	};
+
 	render() {
 		const { posts, comments, isLoading, match } = this.props;
 
 		const post = posts[match.params.id];
+
+		let actualComments = (comments && comments.length > 0) ? comments.filter(comment => comment.parentId === match.params.id) : [];
 
 		return (
 			<div>
@@ -29,15 +70,22 @@ class Single extends Component {
 
 				<div className="container">
 					{post && !isLoading && (
-						<div>
-							<Post {...{post}} key={post.id} />
-							<p>{post.body}</p>
-						</div>
+						<Post {...{post}} key={post.id} showBody={true} />
 					)}
 
-					{comments && comments.length > 0 && !isLoading && comments.map(comment => (
-						<Comment {...{comment}} key={comment.id} />
+					{actualComments && actualComments.length > 0 && !isLoading && actualComments.map(comment => (
+							<Comment {...{comment}} key={comment.id} postId={post.id} />
 					))}
+
+					<hr />
+
+					<div className="comment__add">
+						<p><strong>Add a commentary</strong></p>
+						<form onSubmit={this.saveComment}>
+							<textarea className="comment__textarea" placeholder="Write here..." rows="10" cols="80" maxLength="200" required onChange={this.bodyChange}value={this.state.commentBody}></textarea>
+							<button className="btn comment__btn" type="submit">Save</button>
+						</form>
+					</div>
 				</div>
 			</div>
 		);

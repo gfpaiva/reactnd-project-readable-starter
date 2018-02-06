@@ -61,7 +61,7 @@ export const deletePostById = id => delFetch(`/posts/${id}`);
 
 // COMMENTS
 export const getCommentById = id => getFetch(`/comments/${id}`);
-export const setComment = post => setFetch(`/comments`, post);
+export const setComment = commentary => setFetch(`/comments`, commentary);
 export const voteComment = (id, option) => setFetch(`/comments/${id}`, { option });
 export const editComment = (id, info) => setFetch(`/comments/${id}`, info, 'PUT');
 export const deleteCommentById = id => delFetch(`/comments/${id}`);

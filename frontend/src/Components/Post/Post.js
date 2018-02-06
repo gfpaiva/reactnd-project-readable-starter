@@ -1,47 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Vote from '../Vote/Vote';
 import { formatDate } from '../../Utils/helpers';
-import { FaAngleUp, FaAngleDown, FaUser, FaCalendar, FaCommentsO } from 'react-icons/lib/fa';
-import { vote } from '../../Actions';
+import { FaUser, FaCalendar, FaCommentsO } from 'react-icons/lib/fa';
+import { votePost } from '../../Actions';
+
+import './Post.css';
 
 class Post extends Component {
 
 	handleVote(e) {
-		const post = this.props.post;
+		const { post } = this.props;
 		const option = e.currentTarget.value;
 
-		this.props.dispatch(vote(post, option));
+		this.props.dispatch(votePost(post, option));
 	};
 
 
 	render() {
-		const { post } = this.props;
+		const { post, showBody } = this.props;
 
 		return (
-			<div>
-				<div>
-					<h2>
+			<div className="post__wrapper wrapper">
+				<div className="post__infos">
+					<h2 className="post__title">
 						<Link to={`/${post.category}/${post.id}`}>
 							{post.title}
 						</Link>
 					</h2>
-					<p><FaUser /> {post.author}</p>
-					<p><FaCalendar /> {formatDate(post.timestamp)}</p>
-					<p><FaCommentsO /> {post.commentCount}</p>
+					<p className="info"><FaUser /> {post.author}</p>
+					<p className="info"><FaCalendar /> {formatDate(post.timestamp)}</p>
+					<p className="info"><FaCommentsO /> {post.commentCount}</p>
+
+					{showBody && <p className="post__body">{post.body}</p>}
 				</div>
-				<div>
-					<button title="Vote Up" value="upVote" onClick={e => this.handleVote(e)}>
-						<FaAngleUp />
-					</button>
-					<p>{post.voteScore}</p>
-					<button title="Vote Down" value="downVote" onClick={e => this.handleVote(e)}>
-						<FaAngleDown />
-					</button>
-				</div>
+				<Vote handleVote={this.handleVote.bind(this)} voteScore={post.voteScore} />
 			</div>
 		);
-	}
+	};
 };
 
 export default connect(null)(Post);

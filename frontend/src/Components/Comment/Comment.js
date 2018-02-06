@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Vote from '../Vote/Vote';
 import { formatDate } from '../../Utils/helpers';
-import { FaAngleUp, FaAngleDown, FaUser, FaCalendar } from 'react-icons/lib/fa';
-import { vote } from '../../Actions';
+import { FaUser, FaCalendar } from 'react-icons/lib/fa';
+import { voteComment } from '../../Actions';
+
+import './Comment.css';
 
 class Comment extends Component {
 
 	handleVote(e) {
-		const post = this.props.post;
+		const { comment } = this.props;
 		const option = e.currentTarget.value;
 
-		this.props.dispatch(vote(post, option));
+		this.props.dispatch(voteComment(comment, option));
 	};
 
 
@@ -18,21 +21,13 @@ class Comment extends Component {
 		const { comment } = this.props;
 
 		return (
-			<div>
-				<div>
-					<p>{comment.body}	</p>
-					<p><FaUser /> {comment.author}</p>
-					<p><FaCalendar /> {formatDate(comment.timestamp)}</p>
+			<div className="comment__wrapper wrapper">
+				<div className="comment__infos">
+					<p className="comment__body">{comment.body}</p>
+					<p className="info"><FaUser /> {comment.author}</p>
+					<p className="info"><FaCalendar /> {formatDate(comment.timestamp)}</p>
 				</div>
-				<div>
-					<button title="Vote Up" value="upVote" onClick={e => this.handleVote(e)}>
-						<FaAngleUp />
-					</button>
-					<p>{comment.voteScore}</p>
-					<button title="Vote Down" value="downVote" onClick={e => this.handleVote(e)}>
-						<FaAngleDown />
-					</button>
-				</div>
+				<Vote handleVote={this.handleVote.bind(this)} voteScore={comment.voteScore} />
 			</div>
 		);
 	}

@@ -1,4 +1,5 @@
-.header__wrapper {
+.header__wrapper,
+.footer__wrapper {
   background: #34435E;
   color: #D8D2E1;
 }
