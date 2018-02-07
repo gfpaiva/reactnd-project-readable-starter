@@ -3,10 +3,13 @@ import { schema, normalize } from 'normalizr';
 
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_POSTS = 'GET_POSTS';
+export const SET_POST = 'SET_POST';
+export const DELETE_POST = 'DELETE_POST';
 export const VOTE_POST = 'VOTE_POST';
 export const SET_SCORE = 'SET_SCORE';
 export const GET_COMMENTS = 'GET_COMMENTS';
 export const SET_COMMENT = 'SET_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const VOTE_COMMENT = 'VOTE_COMMENT';
 export const UPDATE_LOADING = 'UPDATE_LOADING';
 
@@ -53,6 +56,22 @@ export const votePost = (post, option) => {
 		option
 	};
 };
+export const setPost = post => {
+	API.setPost(post);
+
+	return	{
+		type: SET_POST,
+		post
+	};
+};
+export const deletePost = post => {
+	API.deletePostById(post.id);
+
+	return	{
+		type: DELETE_POST,
+		post
+	};
+};
 
 
 // ***Comments
@@ -84,6 +103,14 @@ export const setComment = comment => {
 
 	return	{
 		type: SET_COMMENT,
+		comment
+	};
+};
+export const deleteComment = comment => {
+	API.deleteCommentById(comment.id);
+
+	return	{
+		type: DELETE_COMMENT,
 		comment
 	};
 };

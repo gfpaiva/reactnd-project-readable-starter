@@ -7,6 +7,7 @@ import Footer from './Components/Footer/Footer';
 import Archive from './Pages/Archive';
 import Single from './Pages/Single';
 import NotFound from './Pages/NotFound';
+import AddPost from './Pages/AddPost';
 
 class App extends Component {
 
@@ -20,6 +21,7 @@ class App extends Component {
 				<Header />
 				<Switch>
 					<Route exact path="/" component={Archive}/>
+					<Route exact path="/add" component={AddPost}/>
 					<Route exact path="/:category" component={Archive}/>
 					<Route exact path="/:category/:id" component={Single}/>
 					{/* 404 page */}

@@ -1,16 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FaAngleUp, FaAngleDown } from 'react-icons/lib/fa';
+import { FaThumbsOUp, FaThumbsODown } from 'react-icons/lib/fa';
 
 const Vote = ({ handleVote, voteScore }) => {
 	return (
 		<div className="post__vote">
 			<button className="post__button" title="Vote Up" value="upVote" onClick={e => handleVote(e)}>
-				<FaAngleUp />
+				<FaThumbsOUp /> <span>+</span>
 			</button>
-			<p><strong>{voteScore}</strong></p>
+			<p>
+				Vote Score: <br />
+				<strong>{voteScore}</strong>
+			</p>
 			<button className="post__button" title="Vote Down" value="downVote" onClick={e => handleVote(e)}>
-				<FaAngleDown />
+				<FaThumbsODown /> <span>-</span>
 			</button>
 		</div>
 	);

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Vote from '../Vote/Vote';
+import Actions from '../Actions/Actions';
 import { formatDate } from '../../Utils/helpers';
 import { FaUser, FaCalendar } from 'react-icons/lib/fa';
-import { voteComment } from '../../Actions';
+import { voteComment, deleteComment } from '../../Actions';
 
 import './Comment.css';
 
@@ -14,6 +15,16 @@ class Comment extends Component {
 		const option = e.currentTarget.value;
 
 		this.props.dispatch(voteComment(comment, option));
+	};
+
+	handleDelete = e => {
+		e.preventDefault();
+
+		const { comment, dispatch } = this.props;
+
+		if(window.confirm(`Delete Commentary?`)) {
+			dispatch(deleteComment(comment))
+		}
 	};
 
 
@@ -28,6 +39,7 @@ class Comment extends Component {
 					<p className="info"><FaCalendar /> {formatDate(comment.timestamp)}</p>
 				</div>
 				<Vote handleVote={this.handleVote.bind(this)} voteScore={comment.voteScore} />
+				{comment.author === 'gfpaiva' && <Actions handleDelete={this.handleDelete} />}
 			</div>
 		);
 	}

@@ -2,10 +2,13 @@ import { combineReducers } from 'redux';
 import {
 	GET_CATEGORIES,
 	GET_POSTS,
+	SET_POST,
+	DELETE_POST,
 	VOTE_POST,
 	SET_SCORE,
 	GET_COMMENTS,
 	SET_COMMENT,
+	DELETE_COMMENT,
 	VOTE_COMMENT,
 	UPDATE_LOADING
 } from '../Actions';
@@ -39,12 +42,23 @@ const categories = (state = [], action) => {
 };
 
 const posts = (state = {}, action) => {
-	const { posts, comment } = action;
+	const { posts, post, comment } = action;
 	switch(action.type) {
 		case GET_POSTS:
 			return posts || state;
-		case VOTE_POST:
-			return voteCase(state, action, 'post');
+		case SET_POST:
+			return {
+				...state,
+				[post.id]: post
+			};
+		case DELETE_POST:
+			return {
+				...state,
+				[post.id]: {
+					...state[post.id],
+					deleted: true
+				}
+			};
 		case SET_COMMENT:
 			return {
 				...state,
@@ -53,6 +67,16 @@ const posts = (state = {}, action) => {
 					commentCount: state[comment.parentId].commentCount + 1
 				}
 			};
+		case DELETE_COMMENT:
+			return {
+				...state,
+				[comment.parentId]: {
+					...state[comment.parentId],
+					commentCount: state[comment.parentId].commentCount - 1
+				}
+			};
+		case VOTE_POST:
+			return voteCase(state, action, 'post');
 		default:
 			return state;
 	}
@@ -69,7 +93,15 @@ const comments = (state = {}, action) => {
 		case SET_COMMENT:
 			return {
 				...state,
-				[comment.id] : comment
+				[comment.id]: comment
+			};
+		case DELETE_COMMENT:
+			return {
+				...state,
+				[comment.id]: {
+					...state[comment.id],
+					deleted: true
+				}
 			};
 		case VOTE_COMMENT:
 			return voteCase(state, action, 'comment');

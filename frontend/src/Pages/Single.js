@@ -10,7 +10,7 @@ import moment from 'moment';
 
 class Single extends Component {
 	state = {
-		commentBody: '',
+		commentBody: ''
 	};
 
 	commentTemplate = {
@@ -70,12 +70,14 @@ class Single extends Component {
 
 				<div className="container">
 					{post && !isLoading && (
-						<Post {...{post}} key={post.id} showBody={true} />
-					)}
+						<div>
+							<Post {...{post}} key={post.id} showBody={true} />
 
-					{actualComments && actualComments.length > 0 && !isLoading && actualComments.map(comment => (
-							<Comment {...{comment}} key={comment.id} postId={post.id} />
-					))}
+							{actualComments && actualComments.length > 0 && actualComments.map(comment => (
+								<Comment {...{comment}} key={comment.id} postId={post.id} />
+							))}
+						</div>
+					)}
 
 					<hr />
 

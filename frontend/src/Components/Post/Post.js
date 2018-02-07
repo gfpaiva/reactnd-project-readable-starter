@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Vote from '../Vote/Vote';
+import Actions from '../Actions/Actions';
 import { formatDate } from '../../Utils/helpers';
 import { FaUser, FaCalendar, FaCommentsO } from 'react-icons/lib/fa';
-import { votePost } from '../../Actions';
+import { votePost, deletePost } from '../../Actions';
 
 import './Post.css';
 
@@ -15,6 +16,16 @@ class Post extends Component {
 		const option = e.currentTarget.value;
 
 		this.props.dispatch(votePost(post, option));
+	};
+
+	handleDelete = e => {
+		e.preventDefault();
+
+		const { post, dispatch } = this.props;
+
+		if(window.confirm(`Delete ${post.title}?`)) {
+			dispatch(deletePost(post))
+		}
 	};
 
 
@@ -36,6 +47,7 @@ class Post extends Component {
 					{showBody && <p className="post__body">{post.body}</p>}
 				</div>
 				<Vote handleVote={this.handleVote.bind(this)} voteScore={post.voteScore} />
+				{post.author === 'gfpaiva' && <Actions handleDelete={this.handleDelete} />}
 			</div>
 		);
 	};
