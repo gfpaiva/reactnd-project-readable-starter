@@ -4,7 +4,7 @@ import Post from '../Components/Post/Post';
 import Sort from '../Components/Sort/Sort';
 import Loader from '../Components/Loader/Loader';
 import { fetchPosts } from '../Actions';
-import { values as _values } from 'lodash';
+import { getSortPosts } from '../Utils/selectors';
 import PropTypes from 'prop-types';
 
 class Archive extends Component {
@@ -46,19 +46,14 @@ Archive.propTypes = {
 	isLoading: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = ({ posts, sort, isLoading }) => {
-	const postsArray = _values(posts).sort((a, b) => {
-		if (sort.order === "desc") {
-			return parseFloat(b[sort.value]) - parseFloat(a[sort.value]);
-		} else {
-			return parseFloat(a[sort.value]) - parseFloat(b[sort.value]);
-		}
-	}).filter(posts => !posts.deleted);
+const mapStateToProps = (state) => {
+	const { isLoading } = state;
+	const postsArray = getSortPosts(state);
 
 	return {
 		posts: postsArray,
 		isLoading
 	}
-}
+};
 
 export default connect(mapStateToProps)(Archive);

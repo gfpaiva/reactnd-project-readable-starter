@@ -5,7 +5,7 @@ import Comment from '../Components/Comment/Comment';
 import Loader from '../Components/Loader/Loader';
 import { fetchPostById, fetchCommentsByPostId, setComment } from '../Actions';
 import NotFound from './NotFound';
-import { values as _values } from 'lodash';
+import { getSortComments } from '../Utils/selectors';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 
@@ -23,7 +23,7 @@ class Single extends Component {
 		voteScore: 1,
 		deleted: false,
 		parentDeleted: false
-	}
+	};
 
 	componentDidMount() {
 		const { posts, match } = this.props;
@@ -121,15 +121,15 @@ Single.propTypes = {
 };
 
 
-const mapStateToProps = ({ posts, comments, isLoading }) => {
-	const commentssArray = _values(comments).sort((a, b) => {
-		return parseFloat(b.voteScore) - parseFloat(a.voteScore);
-	}).filter(comments => !comments.deleted);
+const mapStateToProps = (state) => {
+	const { posts, isLoading } = state;
+
+	const commentsArray = getSortComments(state);
 
 	return {
 		posts,
 		isLoading,
-		comments: commentssArray,
+		comments: commentsArray,
 	};
 };
 
