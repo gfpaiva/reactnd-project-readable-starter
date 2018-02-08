@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { capitalize as _capitalize } from 'lodash';
 import { sort } from '../../Actions';
+import PropTypes from 'prop-types';
 
 import './Sort.css';
 
@@ -47,6 +48,10 @@ class Sort extends Component {
 			</div>
 		);
 	}
+};
+
+Sort.propTypes = {
+	dispatch: PropTypes.func.isRequired
 };
 
 export default connect(null)(Sort);

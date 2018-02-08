@@ -19,6 +19,7 @@ class App extends Component {
 		return (
 			<div className="app">
 				<Header />
+
 				<Switch>
 					<Route exact path="/" component={Archive}/>
 					<Route exact path="/add" component={AddPost}/>
@@ -27,6 +28,7 @@ class App extends Component {
 					{/* 404 page */}
 					<Route component={NotFound} />
 				</Switch>
+
 				<Footer />
 			</div>
 		);

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import FaBook from 'react-icons/lib/fa/book';
+import PropTypes from 'prop-types';
 
 import './Header.css';
 
@@ -35,10 +36,10 @@ const Header = ({ categories }) => {
 	);
 };
 
-const mapStateToProps = ({ categories }) => {
-	return {
-		categories
-	}
+Header.propTypes = {
+	categories: PropTypes.array.isRequired
 };
+
+const mapStateToProps = ({ categories }) => ({ categories });
 
 export default connect(mapStateToProps)(Header);

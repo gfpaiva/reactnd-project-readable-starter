@@ -11,7 +11,11 @@ const Footer = () => {
 					<p>Made By: Guilherme Paiva. ReactND <span role="img" aria-label="Nerd Face">🤓</span></p>
 				</footer>
 			</div>
-			<Link to="/add" className="btn btn--add" title="Add Post">+</Link>
+			<Link
+				to="/add"
+				className="btn btn--add"
+				title="Add Post"
+			><span>+</span></Link>
 		</div>
 	);
 };

@@ -5,7 +5,12 @@ import './Loader.css';
 const Loader = () => {
 	return (
 		<div className="loader__wrapper">
-			<ReactLoading type="spin" color="#34435E" height='150px' width='150px' />
+			<ReactLoading
+				type="spin"
+				color="#34435E"
+				height='150px'
+				width='150px'
+			/>
 		</div>
 	);
 };

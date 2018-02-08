@@ -1,0 +1,12 @@
+.actions {
+	font-size: 12px;
+	margin: 20px 0;
+}
+
+.actions button {
+	border: none;
+	background: transparent;
+	color: #34435E;
+	margin-right: 1em;
+	padding: 0;
+}

@@ -7,6 +7,7 @@ import { fetchPostById, fetchCommentsByPostId, setComment } from '../Actions';
 import NotFound from './NotFound';
 import { values as _values } from 'lodash';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 class Single extends Component {
 	state = {
@@ -71,28 +72,54 @@ class Single extends Component {
 				<div className="container">
 					{post && !isLoading && (
 						<div>
-							<Post {...{post}} key={post.id} showBody={true} />
+							<div>
+								<Post
+									{...{post}}
+									key={post.id}
+									showBody={true}
+								/>
 
-							{actualComments && actualComments.length > 0 && actualComments.map(comment => (
-								<Comment {...{comment}} key={comment.id} postId={post.id} />
-							))}
+								{actualComments && actualComments.length > 0 && actualComments.map(comment => (
+									<Comment
+										{...{comment}}
+										key={comment.id}
+										postId={post.id}
+									/>
+								))}
+							</div>
+
+							<div className="comment__add">
+								<p><strong>Add a commentary</strong></p>
+
+								<form onSubmit={this.saveComment}>
+									<textarea
+										className="comment__textarea"
+										placeholder="Write here..."
+										rows="10" cols="80"
+										maxLength="200"
+										required
+										onChange={this.bodyChange}
+										value={this.state.commentBody}
+									></textarea>
+
+									<button className="btn comment__btn" type="submit">Save</button>
+								</form>
+							</div>
 						</div>
 					)}
-
-					<hr />
-
-					<div className="comment__add">
-						<p><strong>Add a commentary</strong></p>
-						<form onSubmit={this.saveComment}>
-							<textarea className="comment__textarea" placeholder="Write here..." rows="10" cols="80" maxLength="200" required onChange={this.bodyChange}value={this.state.commentBody}></textarea>
-							<button className="btn comment__btn" type="submit">Save</button>
-						</form>
-					</div>
 				</div>
 			</div>
 		);
 	};
 };
+
+Single.propTypes = {
+	dispatch: PropTypes.func.isRequired,
+	posts: PropTypes.object.isRequired,
+	comments: PropTypes.array.isRequired,
+	isLoading: PropTypes.bool.isRequired
+};
+
 
 const mapStateToProps = ({ posts, comments, isLoading }) => {
 	const commentssArray = _values(comments).sort((a, b) => {

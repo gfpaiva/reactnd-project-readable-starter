@@ -5,6 +5,7 @@ import Sort from '../Components/Sort/Sort';
 import Loader from '../Components/Loader/Loader';
 import { fetchPosts } from '../Actions';
 import { values as _values } from 'lodash';
+import PropTypes from 'prop-types';
 
 class Archive extends Component {
 
@@ -27,12 +28,22 @@ class Archive extends Component {
 				<div>
 					{posts.length > 1 && <Sort />}
 					{posts.map(post => (
-						<Post {...{post}} key={post.id} />
+						<Post
+							{...{post}}
+							key={post.id}
+							showControls={false}
+						/>
 					))}
 				</div>}
 			</div>
 		);
 	};
+};
+
+Archive.propTypes = {
+	dispatch: PropTypes.func.isRequired,
+	posts: PropTypes.array.isRequired,
+	isLoading: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = ({ posts, sort, isLoading }) => {

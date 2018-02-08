@@ -6,15 +6,21 @@
 }
 
 .post__wrapper {
-	background-color: #dedede;
-	border: 1px solid #b0b0b0;
+	/* background-color: #dedede; */
+	border-bottom: 1px solid #b0b0b0;
 	margin: 20px auto;
-	max-width: 75%;
+	max-width: 80%;
 	padding: 20px;
+}
+
+.post__wrapper:last-child {
+	border-bottom: none
 }
 
 .post__title {
 	margin-top: 0;
+	font-weight: normal;
+	font-size: 28px;
 }
 
 .post__infos {
@@ -34,12 +40,53 @@
 	border: none;
 	background: #fff;
 	padding: .5em;
-	border: 1px solid #34435E
+	border: 1px solid #34435E;
+	transition: all .5s ease;
+}
+
+.post__button[title="Vote Up"] {
+	margin-right: .5em;
+}
+
+.post__button:hover {
+	background-color: #34435E;
+	color: #fff;
 }
 
 .post__body {
-	border-top: 1px solid;
-	padding-top: 20px;
-	margin-bottom: 0;
+	/* border-top: 1px solid; */
+	color: #888;
+	margin: 20px 0 0;
+	font-size: 18px;
+}
+
+.post-edit input[type="text"],
+.post-edit textarea {
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+	border-color: #34435E;
+	margin: 0;
+	padding: 0;
+	border-radius: 0;
+	font-weight: normal;
+}
+
+.post-edit .post-edit__input {
+	color: #34435E;
+	font-size: 28px;
+	margin-bottom: calc(.83em - 1px)!important;
+}
+
+.post-edit input[type="text"]:focus,
+.post-edit textarea:focus {
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+}
+
+.post-edit .post-edit__area {
+	color: #888;
+	margin: 20px 0 0;
 	font-size: 18px;
 }

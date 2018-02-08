@@ -4,11 +4,13 @@ import { schema, normalize } from 'normalizr';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_POSTS = 'GET_POSTS';
 export const SET_POST = 'SET_POST';
+export const UPDATE_POST = 'UPDATE_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const VOTE_POST = 'VOTE_POST';
 export const SET_SCORE = 'SET_SCORE';
 export const GET_COMMENTS = 'GET_COMMENTS';
 export const SET_COMMENT = 'SET_COMMENT';
+export const UPDATE_COMMENT = 'UPDATE_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const VOTE_COMMENT = 'VOTE_COMMENT';
 export const UPDATE_LOADING = 'UPDATE_LOADING';
@@ -64,6 +66,14 @@ export const setPost = post => {
 		post
 	};
 };
+export const updatePost = post => {
+	API.editPost(post.id, post);
+
+	return	{
+		type: UPDATE_POST,
+		post
+	};
+};
 export const deletePost = post => {
 	API.deletePostById(post.id);
 
@@ -103,6 +113,14 @@ export const setComment = comment => {
 
 	return	{
 		type: SET_COMMENT,
+		comment
+	};
+};
+export const updateComment = comment => {
+	API.editComment(comment.id, comment);
+
+	return	{
+		type: UPDATE_COMMENT,
 		comment
 	};
 };

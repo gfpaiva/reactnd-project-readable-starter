@@ -24,36 +24,55 @@ a {
 
 .btn {
   background-color: rgb(23, 24, 46);
-  border: none;
-  box-shadow: 0px 5px 15px rgba(0,0,0,.55);
-  color: #60E1E0;
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: 30px;
+  color: #fff;
   cursor: pointer;
-  padding: .5em 2em;
+  padding: 1em 3em;
   transition: all .5s ease;
+  font-size: 14px;
 }
 
 .btn:hover {
-  background-color: rgba(23, 24, 46, .95);
-  box-shadow: 0px 5px 15px rgba(0,0,0,.75);
+  background-color: rgba(23, 24, 46, .90);
+  border-color:  rgba(23, 24, 46, .90);
 }
 
 .btn.btn--add {
   border-radius: 50%;
-  display: inline-block;
-  font-size: 13px;
-  font-weight: bold;
-  line-height: 1;
-  padding: 1.2em;
-  position: fixed;
   bottom: 50px;
+  font-size: 35px;
+  font-weight: lighter;
+  height: 65px;
+  padding: 0;
+  position: fixed;
   right: 50px;
+  text-align: center;
+  width: 65px;
+}
+
+.btn.btn--add span {
+  display: inline-block;
+  height: 100%;
+  vertical-align: sub;
+}
+
+.btn--sec {
+  background-color: #fff;
+  color: rgb(23, 24, 46);
+}
+
+.btn--sec:hover {
+  background-color: #fff;
 }
 
 input[type="text"],
 textarea,
 select {
+  font-family: 'Lato', sans-serif;
   border: 1px solid rgba(0,0,0,.2);
-	box-shadow: 0px 5px 15px rgba(0,0,0,.55);
+  /* box-shadow: 0px 5px 15px rgba(0,0,0,.25); */
+  border-radius: 20px;
 	margin-bottom: 10px;
 	outline: none;
 	padding: 1em;
@@ -65,6 +84,18 @@ select {
 input[type="text"]:focus,
 textarea:focus,
 select:focus {
-  border: 1px solid rgba(0,0,0,.3);
-	box-shadow: 0px 5px 15px rgba(0,0,0,.75);
+  border: 1px solid #34435E;
+	/* box-shadow: 0px 5px 15px rgba(0,0,0,.35); */
+}
+
+button {
+  border-radius: 20px;
+  border: 1px solid rgba(0,0,0,.2);
+  padding: .5em .75em;
+  cursor: pointer;
+  outline: none;
+}
+
+.edit__btn {
+	margin: .5em .5em 0 0;
 }

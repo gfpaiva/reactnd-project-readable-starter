@@ -3,11 +3,13 @@ import {
 	GET_CATEGORIES,
 	GET_POSTS,
 	SET_POST,
+	UPDATE_POST,
 	DELETE_POST,
 	VOTE_POST,
 	SET_SCORE,
 	GET_COMMENTS,
 	SET_COMMENT,
+	UPDATE_COMMENT,
 	DELETE_COMMENT,
 	VOTE_COMMENT,
 	UPDATE_LOADING
@@ -47,6 +49,7 @@ const posts = (state = {}, action) => {
 		case GET_POSTS:
 			return posts || state;
 		case SET_POST:
+		case UPDATE_POST:
 			return {
 				...state,
 				[post.id]: post
@@ -91,6 +94,7 @@ const comments = (state = {}, action) => {
 				...comments
 			};
 		case SET_COMMENT:
+		case UPDATE_COMMENT:
 			return {
 				...state,
 				[comment.id]: comment

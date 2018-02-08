@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setPost } from '../Actions/index';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 class AddPost extends Component {
 	state = {
@@ -71,21 +72,48 @@ class AddPost extends Component {
 				<h2>Add Post</h2>
 				<hr />
 				<form onSubmit={this.savePost}>
-					<input type="text" value={this.state.postTitle} placeholder="Post Title" onChange={this.titleChange} required /><br />
+					<input
+						type="text"
+						value={this.state.postTitle}
+						placeholder="Post Title"
+						onChange={this.titleChange}
+						required
+					/><br />
+
 					{categories && categories.length > 0 &&
-						<select required onChange={this.categoryChange} value={this.state.postCategory}>
+						<select
+							required
+							onChange={this.categoryChange}
+							value={this.state.postCategory}
+						>
 							<option value="">Select a Category</option>
 							{categories.map((category, index) => (
 								<option key={`${category.name}-${index}`} value={category.name}>{category.name}</option>
 							))}
 						</select>
 					}
-					<textarea className="post__textarea" placeholder="Post content" rows="10" cols="80" maxLength="200" required onChange={this.bodyChange}value={this.state.postBody}></textarea><br />
+
+					<textarea
+						className="post__textarea"
+						placeholder="Post content"
+						rows="10"
+						cols="80"
+						maxLength="200"
+						required
+						onChange={this.bodyChange}
+						value={this.state.postBody}
+					></textarea><br />
+
 					<button className="btn post__btn" type="submit">Save</button>
 				</form>
 			</div>
 		);
 	};
+};
+
+AddPost.propTypes = {
+	dispatch: PropTypes.func.isRequired,
+	categories: PropTypes.array.isRequired
 };
 
 const mapStateToProps = ({ categories }) => ({ categories });
