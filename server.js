@@ -7,6 +7,7 @@ const config = require('./config')
 const categories = require('./categories')
 const posts = require('./posts')
 const comments = require('./comments')
+const path = require('path')
 
 const app = express()
 
