@@ -1,4 +1,4 @@
-const api = process.env.REACT_API_HOST;
+const api = process.env.REACT_API_HOST || 'https://gfpaiva-readable.herokuapp.com';
 
 // Generate a unique token for storing your bookshelf data on the backend server.
 let token = localStorage.token

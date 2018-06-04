@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "start": "node server.js",
-    "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build REACT_API_HOST=https://gfpaiva-readable.herokuapp.com/"
+    "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && REACT_API_HOST=https://gfpaiva-readable.herokuapp.com npm run build"
   },
   "author": "David Harris",
   "license": "ISC",
