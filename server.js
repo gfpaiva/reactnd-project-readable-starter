@@ -11,9 +11,10 @@ const path = require('path')
 
 const app = express()
 
-app.use(express.static('public'))
+app.use(express.static(path.resolve(__dirname, './client/build')))
 app.use(cors())
 
+/* app.use(express.static('public')) */
 /* app.use((req, res, next) => {
   const token = req.get('Authorization')
 
